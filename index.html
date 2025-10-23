@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>komee.org — 為替・株価ライトダッシュボード</title>
+  <meta name="description" content="USD/JPYや主要株価・仮想通貨の軽量ダッシュボード。TradingView公式ウィジェットのみで追加コストゼロ運用。" />
+  <link rel="preconnect" href="https://s3.tradingview.com" crossorigin>
+  <style>
+    :root { --bg:#0b0f14; --panel:#121821; --text:#e6edf3; --muted:#8b98a5; --acc:#4cc2ff; }
+    *{box-sizing:border-box}
+    body { margin:0; font-family: -apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI","Meiryo UI",sans-serif; background:var(--bg); color:var(--text); }
+    header { position:sticky; top:0; z-index:20; background:linear-gradient(180deg, rgba(18,24,33,.95), rgba(18,24,33,.7)); backdrop-filter:saturate(160%) blur(6px); border-bottom:1px solid #111722; }
+    .wrap { max-width:1120px; margin:0 auto; padding:16px; }
+    .row { display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 900px){ .row{ grid-template-columns: 2fr 1fr; } }
+    .card { background:var(--panel); border:1px solid #111722; border-radius:16px; padding:12px; box-shadow:0 5px 20px rgba(0,0,0,.25); }
+    .title { font-size:22px; font-weight:700; letter-spacing:.2px; }
+    .muted { color:var(--muted); font-size:13px; }
+    footer { border-top:1px solid #111722; color:var(--muted); }
+    a { color: var(--acc); text-decoration: none; }
+    .ad { background:#0e141d; border:1px dashed #1a2432; border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; min-height:90px; }
+    .section-title { font-size:18px; font-weight:700; margin:6px 0 10px; }
+    .grid { display:grid; grid-template-columns:1fr; gap:16px; }
+    @media (min-width: 720px){ .grid{ grid-template-columns:repeat(2,1fr);} }
+    @media (min-width: 1100px){ .grid{ grid-template-columns:repeat(3,1fr);} }
+    .badge { display:inline-block; font-size:12px; color:#9fb6c8; background:#0e141d; border:1px solid #1a2432; padding:2px 8px; border-radius:999px; }
+  </style>
+  <!-- Google AdSense: ご自身のIDに変更してください（ca-pub-XXXXXXXXXXXXXX） -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
+        <div>
+          <div class="title">komee.org <span class="badge">MVP</span></div>
+          <div class="muted">為替・株価・仮想通貨のライトダッシュボード（追加コストゼロ運用）</div>
+        </div>
+        <nav class="muted" style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="#fx">FX</a>
+          <a href="#equities">株価</a>
+          <a href="#crypto">仮想通貨</a>
+          <a href="#calendar">経済カレンダー</a>
+          <a href="#about">このサイトについて</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ティッカーテープ（主要銘柄スライド） -->
+    <section class="card">
+      <div id="ticker">
+        <div class="section-title">マーケット・テープ</div>
+        <div class="muted">主要為替 / 株価指数 / 暗号資産のヘッドライン</div>
+        <div class="ad" style="margin:10px 0 12px;">
+          <!-- AdSense レスポンシブ広告（見出し下）-->
+          <!--
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          -->
+          <span class="muted">広告（AdSense）配置エリア — 審査通過後に表示されます</span>
+        </div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+          {
+            "symbols": [
+              { "proName": "FX:USDJPY", "title": "USD/JPY" },
+              { "proName": "FX:EURJPY", "title": "EUR/JPY" },
+              { "proName": "FX:EURUSD", "title": "EUR/USD" },
+              { "proName": "SP:SPX", "title": "S&P 500" },
+              { "proName": "TVC:NI225", "title": "Nikkei 225" },
+              { "proName": "NASDAQ:NDX", "title": "NASDAQ 100" },
+              { "proName": "COINBASE:BTCUSD", "title": "BTC/USD" },
+              { "proName": "COINBASE:ETHUSD", "title": "ETH/USD" }
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "locale": "ja"
+          }
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <div class="row" id="fx">
+      <!-- 左：チャート領域 -->
+      <section class="card">
+        <div class="section-title">USD/JPY — ラインチャート</div>
+        <div class="tradingview-widget-container" style="height:480px;">
+          <div class="tradingview-widget-container__widget" style="height:480px;"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {
+            "autosize": true,
+            "symbol": "FX:USDJPY",
+            "interval": "60",
+            "timezone": "Asia/Tokyo",
+            "theme": "dark",
+            "style": "1",
+            "locale": "ja",
+            "allow_symbol_change": true,
+            "calendar": true,
+            "hide_volume": false,
+            "support_host": "https://www.tradingview.com"
+          }
+          </script>
+        </div>
+      </section>
+
+      <!-- 右：マーケット概要ウィジェット -->
+      <aside class="card">
+        <div class="section-title">マーケット概要</div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+          {
+            "colorTheme": "dark",
+            "dateRange": "12M",
+            "showChart": true,
+            "locale": "ja",
+            "largeChartUrl": "",
+            "isTransparent": true,
+            "showSymbolLogo": true,
+            "showFloatingTooltip": true,
+            "width": "100%",
+            "height": "660",
+            "plotLineColorGrowing": "#2962FF",
+            "plotLineColorFalling": "#2962FF",
+            "gridLineColor": "rgba(42,46,57,0)",
+            "scaleFontColor": "#8b98a5",
+            "belowLineFillColorGrowing": "rgba(41,98,255,0.12)",
+            "belowLineFillColorFalling": "rgba(41,98,255,0.12)",
+            "symbolActiveColor": "rgba(41,98,255,0.12)",
+            "tabs": [
+              {
+                "title": "為替",
+                "symbols": [
+                  {"s": "FX:USDJPY", "d":"USD/JPY"},
+                  {"s": "FX:EURJPY", "d":"EUR/JPY"},
+                  {"s": "FX:GBPJPY", "d":"GBP/JPY"},
+                  {"s": "FX:EURUSD", "d":"EUR/USD"}
+                ]
+              },
+              {
+                "title": "株価指数",
+                "symbols": [
+                  {"s": "TVC:NI225", "d":"Nikkei 225"},
+                  {"s": "SP:SPX", "d":"S&P 500"},
+                  {"s": "TVC:DJI", "d":"Dow Jones"},
+                  {"s": "NASDAQ:NDX", "d":"NASDAQ 100"}
+                ]
+              },
+              {
+                "title": "暗号資産",
+                "symbols": [
+                  {"s": "COINBASE:BTCUSD", "d":"BTC/USD"},
+                  {"s": "COINBASE:ETHUSD", "d":"ETH/USD"}
+                ]
+              }
+            ]
+          }
+          </script>
+        </div>
+
+        <div class="ad" style="margin-top:12px;">
+          <!-- サイドバー広告 -->
+          <!--
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          -->
+          <span class="muted">広告（サイドバー）</span>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 株価と仮想通貨 セクション -->
+    <section class="grid" id="equities">
+      <div class="card">
+        <div class="section-title">Nikkei 225</div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {
+            "symbol": "TVC:NI225",
+            "width": "100%",
+            "height": "220",
+            "locale": "ja",
+            "dateRange": "12M",
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "autosize": false,
+            "largeChartUrl": ""
+          }
+          </script>
+        </div>
+      </div>
+      <div class="card">
+        <div class="section-title">S&P 500</div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {
+            "symbol": "SP:SPX",
+            "width": "100%",
+            "height": "220",
+            "locale": "ja",
+            "dateRange": "12M",
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "autosize": false,
+            "largeChartUrl": ""
+          }
+          </script>
+        </div>
+      </div>
+      <div class="card" id="crypto">
+        <div class="section-title">BTC/USD</div>
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+          {
+            "symbol": "COINBASE:BTCUSD",
+            "width": "100%",
+            "height": "220",
+            "locale": "ja",
+            "dateRange": "12M",
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "autosize": false,
+            "largeChartUrl": ""
+          }
+          </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- 経済カレンダー -->
+    <section class="card" id="calendar">
+      <div class="section-title">世界の経済カレンダー</div>
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+        {
+          "colorTheme": "dark",
+          "isTransparent": true,
+          "width": "100%",
+          "height": "520",
+          "locale": "ja",
+          "importanceFilter": "-1,0,1"
+        }
+        </script>
+      </div>
+    </section>
+
+    <section class="card" id="about">
+      <div class="section-title">このサイトについて（運用・コスト方針）</div>
+      <p class="muted">
+        このMVPは、<strong>TradingView公式ウィジェットのみ</strong>で構成されています。外部APIキーは不要で、GitHub Pages上の静的ホスティングだけで運用できます。
+        したがって、<strong>追加課金ゼロ</strong>で継続運用が可能です。
+      </p>
+      <ul>
+        <li>ホスティング: GitHub Pages（無料）</li>
+        <li>ドメイン: komee.org（サブドメイン推奨: <code>fx.komee.org</code> など）</li>
+        <li>広告: Google AdSense（審査通過後に上記プレースホルダーへコード挿入）</li>
+        <li>ポリシー: プライバシーポリシー/免責事項をサイトフッターに掲出</li>
+      </ul>
+    </section>
+
+    <div class="ad" style="margin:16px 0;">
+      <!-- フッター上広告 -->
+      <!--
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      -->
+      <span class="muted">広告（フッター上）</span>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div>© <span id="y"></span> komee.org</div>
+      <div>
+        <a href="#" onclick="togglePolicy();return false;">プライバシーポリシー</a>
+        <span class="muted">・</span>
+        <a href="#" onclick="toggleDisclaimer();return false;">免責事項</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 簡易ポリシー（モーダル）: AdSense審査を意識して最低限掲出 -->
+  <div id="policy" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);">
+    <div class="card" style="max-width:760px; margin:6vh auto;">
+      <div class="section-title">プライバシーポリシー</div>
+      <div class="muted" style="line-height:1.8;">
+        当サイトでは、第三者配信の広告サービス（Google AdSense）を利用する場合があります。<br>
+        ユーザーの興味に応じた広告を表示するため、Cookie を使用することがあります。<br>
+        Cookie はブラウザ設定から無効化できます。<br>
+        アクセス解析や埋め込みウィジェットにより、閲覧情報が外部に送信される場合があります。<br>
+        取得した情報は、広告配信とサイト改善の目的のみに利用し、法令に基づき適切に管理します。
+      </div>
+      <div style="margin-top:10px; text-align:right;"><button onclick="togglePolicy()">閉じる</button></div>
+    </div>
+  </div>
+  <div id="disclaimer" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);">
+    <div class="card" style="max-width:760px; margin:6vh auto;">
+      <div class="section-title">免責事項</div>
+      <div class="muted" style="line-height:1.8;">
+        当サイトは情報の提供を目的としたもので、投資助言ではありません。<br>
+        価格データや指標の正確性・完全性・最新性を保証しません。<br>
+        これらの情報に基づく行為の結果について、当サイトは一切の責任を負いません。<br>
+        取引はご自身の判断と責任で行ってください。
+      </div>
+      <div style="margin-top:10px; text-align:right;"><button onclick="toggleDisclaimer()">閉じる</button></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    function togglePolicy(){ const el = document.getElementById('policy'); el.style.display = (el.style.display==='none'||!el.style.display)?'block':'none'; }
+    function toggleDisclaimer(){ const el = document.getElementById('disclaimer'); el.style.display = (el.style.display==='none'||!el.style.display)?'block':'none'; }
+  </script>
+</body>
+</html>
