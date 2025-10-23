@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>komee.org — 為替・株価ライトダッシュボード</title>
-  <meta name="description" content="USD/JPYや主要株価・仮想通貨の軽量ダッシュボード。TradingView公式ウィジェットを活用しています。" />
+  <meta name="description" content=\"USD/JPYや主要株価・仮想通貨のダッシュボード。TradingView公式ウィジェットによる軽量表示。\" />
   <link rel="preconnect" href="https://s3.tradingview.com" crossorigin>
   <style>
     :root { --bg:#0b0f14; --panel:#121821; --text:#e6edf3; --muted:#8b98a5; --acc:#4cc2ff; }
@@ -34,7 +34,7 @@
     <div class="wrap">
       <div style="display:flex; gap:12px; align-items:center; justify-content:space-between;">
         <div>
-          <div class="title">komee.org <span class="badge">MVP</span></div>
+          <div class="title">komee.org </div>
           <div class="muted">為替・株価・仮想通貨のライトダッシュボード</div>
         </div>
         <nav class="muted" style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -42,7 +42,6 @@
           <a href="#equities">株価</a>
           <a href="#crypto">仮想通貨</a>
           <a href="#calendar">経済カレンダー</a>
-          <a href="#about">このサイトについて</a>
         </nav>
       </div>
     </div>
@@ -54,25 +53,18 @@
       <div id="ticker">
         <div class="section-title">マーケット・テープ</div>
         <div class="muted">主要為替 / 株価指数 / 暗号資産のヘッドライン</div>
-        <div class="ad" style="margin:10px 0 12px;">
-          <!-- AdSense レスポンシブ広告（見出し下）-->
-          <!--
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          -->
-          <span class="muted">広告（AdSense）配置エリア — 審査通過後に表示されます</span>
-        </div>
+        
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
           <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
           {
             "symbols": [
-              { "proName": "FX:USDJPY", "title": "USD/JPY" },
-              { "proName": "FX:EURJPY", "title": "EUR/JPY" },
-              { "proName": "FX:EURUSD", "title": "EUR/USD" },
-              { "proName": "SP:SPX", "title": "S&P 500" },
+              { "proName": "OANDA:USDJPY", "title": "USD/JPY" },
+              { "proName": "OANDA:EURJPY", "title": "EUR/JPY" },
+              { "proName": "OANDA:EURUSD", "title": "EUR/USD" },
+              { "proName": "AMEX:SPY", "title": "S&P 500" },
               { "proName": "TVC:NI225", "title": "Nikkei 225" },
-              { "proName": "NASDAQ:NDX", "title": "NASDAQ 100" },
+              { "proName": "NASDAQ:QQQ", "title": "NASDAQ 100" },
               { "proName": "COINBASE:BTCUSD", "title": "BTC/USD" },
               { "proName": "COINBASE:ETHUSD", "title": "ETH/USD" }
             ],
@@ -96,7 +88,7 @@
           <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
           {
             "autosize": true,
-            "symbol": "FX:USDJPY",
+            "symbol": "OANDA:USDJPY",
             "interval": "60",
             "timezone": "Asia/Tokyo",
             "theme": "dark",
@@ -139,19 +131,19 @@
               {
                 "title": "為替",
                 "symbols": [
-                  {"s": "FX:USDJPY", "d":"USD/JPY"},
-                  {"s": "FX:EURJPY", "d":"EUR/JPY"},
-                  {"s": "FX:GBPJPY", "d":"GBP/JPY"},
-                  {"s": "FX:EURUSD", "d":"EUR/USD"}
+                  {"s": "OANDA:USDJPY", "d":"USD/JPY"},
+                  {"s": "OANDA:EURJPY", "d":"EUR/JPY"},
+                  {"s": "OANDA:GBPJPY", "d":"GBP/JPY"},
+                  {"s": "OANDA:EURUSD", "d":"EUR/USD"}
                 ]
               },
               {
                 "title": "株価指数",
                 "symbols": [
                   {"s": "TVC:NI225", "d":"Nikkei 225"},
-                  {"s": "SP:SPX", "d":"S&P 500"},
+                  {"s": "AMEX:SPY", "d":"S&P 500"},
                   {"s": "TVC:DJI", "d":"Dow Jones"},
-                  {"s": "NASDAQ:NDX", "d":"NASDAQ 100"}
+                  {"s": "NASDAQ:QQQ", "d":"NASDAQ 100"}
                 ]
               },
               {
@@ -166,14 +158,7 @@
           </script>
         </div>
 
-        <div class="ad" style="margin-top:12px;">
-          <!-- サイドバー広告 -->
-          <!--
-          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-          -->
-          <span class="muted">広告（サイドバー）</span>
-        </div>
+        
       </aside>
     </div>
 
@@ -204,7 +189,7 @@
           <div class="tradingview-widget-container__widget"></div>
           <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
           {
-            "symbol": "SP:SPX",
+            "symbol": "AMEX:SPY",
             "width": "100%",
             "height": "220",
             "locale": "ja",
@@ -256,21 +241,9 @@
       </div>
     </section>
 
-    <section class="card" id="about">
-      <div class="section-title">このサイトについて</div>
-      <p class="muted">
-        為替や株価、暗号資産の主要銘柄をTradingView公式ウィジェットでまとめたシンプルなダッシュボードです。情報量を厳選し、モニタリングに集中できる構成にしています。
-      </p>
-    </section>
+    
 
-    <div class="ad" style="margin:16px 0;">
-      <!-- フッター上広告 -->
-      <!--
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      -->
-      <span class="muted">広告（フッター上）</span>
-    </div>
+    
   </main>
 
   <footer>
