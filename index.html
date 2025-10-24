@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ja">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,27 +8,130 @@
   <meta name="description" content=\"USD/JPYや主要株価・仮想通貨のダッシュボード。TradingView公式ウィジェットによる軽量表示。\" />
   <link rel="preconnect" href="https://s3.tradingview.com" crossorigin>
   <style>
-    :root { --bg:#0b0f14; --panel:#121821; --text:#e6edf3; --muted:#8b98a5; --acc:#4cc2ff; }
-    *{box-sizing:border-box}
-    body { margin:0; font-family: -apple-system,system-ui,Segoe UI,Roboto,Helvetica,Arial,"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI","Meiryo UI",sans-serif; background:var(--bg); color:var(--text); }
-    header { position:sticky; top:0; z-index:20; background:linear-gradient(180deg, rgba(18,24,33,.95), rgba(18,24,33,.7)); backdrop-filter:saturate(160%) blur(6px); border-bottom:1px solid #111722; }
-    .wrap { max-width:1120px; margin:0 auto; padding:16px; }
-    .row { display:grid; grid-template-columns: 1fr; gap:16px; }
-    @media (min-width: 900px){ .row{ grid-template-columns: 2fr 1fr; } }
-    .card { background:var(--panel); border:1px solid #111722; border-radius:16px; padding:12px; box-shadow:0 5px 20px rgba(0,0,0,.25); }
-    .title { font-size:22px; font-weight:700; letter-spacing:.2px; }
-    .muted { color:var(--muted); font-size:13px; }
-    footer { border-top:1px solid #111722; color:var(--muted); }
-    a { color: var(--acc); text-decoration: none; }
-    .ad { background:#0e141d; border:1px dashed #1a2432; border-radius:12px; padding:10px; display:flex; align-items:center; justify-content:center; min-height:90px; }
-    .section-title { font-size:18px; font-weight:700; margin:6px 0 10px; }
-    .grid { display:grid; grid-template-columns:1fr; gap:16px; }
-    @media (min-width: 720px){ .grid{ grid-template-columns:repeat(2,1fr);} }
-    @media (min-width: 1100px){ .grid{ grid-template-columns:repeat(3,1fr);} }
-    .badge { display:inline-block; font-size:12px; color:#9fb6c8; background:#0e141d; border:1px solid #1a2432; padding:2px 8px; border-radius:999px; }
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --text: #e6edf3;
+      --muted: #8b98a5;
+      --acc: #4cc2ff;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Meiryo UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(180deg, rgba(18, 24, 33, .95), rgba(18, 24, 33, .7));
+      backdrop-filter: saturate(160%) blur(6px);
+      border-bottom: 1px solid #111722;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 900px) {
+      .row {
+        grid-template-columns: 2fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #111722;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .25);
+    }
+
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      border-top: 1px solid #111722;
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--acc);
+      text-decoration: none;
+    }
+
+    .ad {
+      background: #0e141d;
+      border: 1px dashed #1a2432;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 6px 0 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 720px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      color: #9fb6c8;
+      background: #0e141d;
+      border: 1px solid #1a2432;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238004847920381" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6238004847920381"
+    crossorigin="anonymous"></script>
 </head>
+
 <body>
   <header>
     <div class="wrap">
@@ -53,36 +157,33 @@
         <div class="section-title">マーケット・テープ</div>
         <div class="muted">主要為替 / 株価指数 / 暗号資産のヘッドライン</div>
         <div class="ad" role="complementary" aria-label="広告">
-          <ins class="adsbygoogle"
-               style="display:block"
-               data-ad-client="ca-pub-6238004847920381"
-               data-ad-slot="9161299051"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6238004847920381"
+            data-ad-slot="9161299051" data-ad-format="auto" data-full-width-responsive="true"></ins>
         </div>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-          {
-            "symbols": [
-              { "proName": "OANDA:USDJPY", "title": "USD/JPY" },
-              { "proName": "OANDA:EURJPY", "title": "EUR/JPY" },
-              { "proName": "OANDA:EURUSD", "title": "EUR/USD" },
-              { "proName": "AMEX:SPY", "title": "S&P 500" },
-              { "proName": "TVC:NI225", "title": "Nikkei 225" },
-              { "proName": "NASDAQ:QQQ", "title": "NASDAQ 100" },
-              { "proName": "COINBASE:BTCUSD", "title": "BTC/USD" },
-              { "proName": "COINBASE:ETHUSD", "title": "ETH/USD" }
-            ],
-            "showSymbolLogo": true,
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "displayMode": "adaptive",
-            "locale": "ja"
-          }
-          </script>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+            async>
+              {
+                "symbols": [
+                  { "proName": "OANDA:USDJPY", "title": "USD/JPY" },
+                  { "proName": "OANDA:EURJPY", "title": "EUR/JPY" },
+                  { "proName": "OANDA:EURUSD", "title": "EUR/USD" },
+                  { "proName": "AMEX:SPY", "title": "S&P 500" },
+                  { "proName": "TVC:NI225", "title": "Nikkei 225" },
+                  { "proName": "NASDAQ:QQQ", "title": "NASDAQ 100" },
+                  { "proName": "COINBASE:BTCUSD", "title": "BTC/USD" },
+                  { "proName": "COINBASE:ETHUSD", "title": "ETH/USD" }
+                ],
+                  "showSymbolLogo": true,
+                    "colorTheme": "dark",
+                      "isTransparent": true,
+                        "displayMode": "adaptive",
+                          "locale": "ja"
+              }
+            </script>
         </div>
       </div>
     </section>
@@ -93,21 +194,22 @@
         <div class="section-title">USD/JPY — ラインチャート</div>
         <div class="tradingview-widget-container" style="height:480px;">
           <div class="tradingview-widget-container__widget" style="height:480px;"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {
-            "autosize": true,
-            "symbol": "OANDA:USDJPY",
-            "interval": "60",
-            "timezone": "Asia/Tokyo",
-            "theme": "dark",
-            "style": "1",
-            "locale": "ja",
-            "allow_symbol_change": true,
-            "calendar": true,
-            "hide_volume": false,
-            "support_host": "https://www.tradingview.com"
-          }
-          </script>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+              {
+                "autosize": true,
+                  "symbol": "OANDA:USDJPY",
+                    "interval": "60",
+                      "timezone": "Asia/Tokyo",
+                        "theme": "dark",
+                          "style": "1",
+                            "locale": "ja",
+                              "allow_symbol_change": true,
+                                "calendar": true,
+                                  "hide_volume": false,
+                                    "support_host": "https://www.tradingview.com"
+              }
+            </script>
         </div>
       </section>
 
@@ -116,57 +218,58 @@
         <div class="section-title">マーケット概要</div>
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-          {
-            "colorTheme": "dark",
-            "dateRange": "12M",
-            "showChart": true,
-            "locale": "ja",
-            "largeChartUrl": "",
-            "isTransparent": true,
-            "showSymbolLogo": true,
-            "showFloatingTooltip": true,
-            "width": "100%",
-            "height": "660",
-            "plotLineColorGrowing": "#2962FF",
-            "plotLineColorFalling": "#2962FF",
-            "gridLineColor": "rgba(42,46,57,0)",
-            "scaleFontColor": "#8b98a5",
-            "belowLineFillColorGrowing": "rgba(41,98,255,0.12)",
-            "belowLineFillColorFalling": "rgba(41,98,255,0.12)",
-            "symbolActiveColor": "rgba(41,98,255,0.12)",
-            "tabs": [
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
               {
-                "title": "為替",
-                "symbols": [
-                  {"s": "OANDA:USDJPY", "d":"USD/JPY"},
-                  {"s": "OANDA:EURJPY", "d":"EUR/JPY"},
-                  {"s": "OANDA:GBPJPY", "d":"GBP/JPY"},
-                  {"s": "OANDA:EURUSD", "d":"EUR/USD"}
-                ]
-              },
-              {
-                "title": "株価指数",
-                "symbols": [
-                  {"s": "TVC:NI225", "d":"Nikkei 225"},
-                  {"s": "AMEX:SPY", "d":"S&P 500"},
-                  {"s": "TVC:DJI", "d":"Dow Jones"},
-                  {"s": "NASDAQ:QQQ", "d":"NASDAQ 100"}
-                ]
-              },
-              {
-                "title": "暗号資産",
-                "symbols": [
-                  {"s": "COINBASE:BTCUSD", "d":"BTC/USD"},
-                  {"s": "COINBASE:ETHUSD", "d":"ETH/USD"}
-                ]
+                "colorTheme": "dark",
+                  "dateRange": "12M",
+                    "showChart": true,
+                      "locale": "ja",
+                        "largeChartUrl": "",
+                          "isTransparent": true,
+                            "showSymbolLogo": true,
+                              "showFloatingTooltip": true,
+                                "width": "100%",
+                                  "height": "660",
+                                    "plotLineColorGrowing": "#2962FF",
+                                      "plotLineColorFalling": "#2962FF",
+                                        "gridLineColor": "rgba(42,46,57,0)",
+                                          "scaleFontColor": "#8b98a5",
+                                            "belowLineFillColorGrowing": "rgba(41,98,255,0.12)",
+                                              "belowLineFillColorFalling": "rgba(41,98,255,0.12)",
+                                                "symbolActiveColor": "rgba(41,98,255,0.12)",
+                                                  "tabs": [
+                                                    {
+                                                      "title": "為替",
+                                                      "symbols": [
+                                                        { "s": "OANDA:USDJPY", "d": "USD/JPY" },
+                                                        { "s": "OANDA:EURJPY", "d": "EUR/JPY" },
+                                                        { "s": "OANDA:GBPJPY", "d": "GBP/JPY" },
+                                                        { "s": "OANDA:EURUSD", "d": "EUR/USD" }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "title": "株価指数",
+                                                      "symbols": [
+                                                        { "s": "TVC:NI225", "d": "Nikkei 225" },
+                                                        { "s": "AMEX:SPY", "d": "S&P 500" },
+                                                        { "s": "TVC:DJI", "d": "Dow Jones" },
+                                                        { "s": "NASDAQ:QQQ", "d": "NASDAQ 100" }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "title": "暗号資産",
+                                                      "symbols": [
+                                                        { "s": "COINBASE:BTCUSD", "d": "BTC/USD" },
+                                                        { "s": "COINBASE:ETHUSD", "d": "ETH/USD" }
+                                                      ]
+                                                    }
+                                                  ]
               }
-            ]
-          }
-          </script>
+            </script>
         </div>
 
-        
+
       </aside>
     </div>
 
@@ -174,70 +277,71 @@
     <section class="grid" id="equities">
       <div class="card">
         <div class="section-title">Nikkei 225</div>
-        <div class="tradingview-widget-container">
-          <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {
-            "symbol": "TVC:NI225",
-            "width": "100%",
-            "height": "220",
-            "locale": "ja",
-            "dateRange": "12M",
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "autosize": false,
-            "largeChartUrl": ""
-          }
-          </script>
+        <div class="tradingview-widget-container" style="height:220px;">
+          <div class="tradingview-widget-container__widget" style="height:220px;"></div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+              {
+                "autosize": true,
+                  "symbol": "TVC:NI225",
+                    "interval": "D",
+                      "timezone": "Asia/Tokyo",
+                        "theme": "dark",
+                          "style": "1",
+                            "locale": "ja",
+                              "hide_volume": true,
+                                "allow_symbol_change": false,
+                                  "withdateranges": false
+              }
+            </script>
         </div>
       </div>
+
       <div class="card">
         <div class="section-title">S&P 500</div>
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {
-            "symbol": "AMEX:SPY",
-            "width": "100%",
-            "height": "220",
-            "locale": "ja",
-            "dateRange": "12M",
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "autosize": false,
-            "largeChartUrl": ""
-          }
-          </script>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {
+                "symbol": "AMEX:SPY",
+                  "width": "100%",
+                    "height": "220",
+                      "locale": "ja",
+                        "dateRange": "12M",
+                          "colorTheme": "dark",
+                            "isTransparent": true,
+                              "autosize": false,
+                                "largeChartUrl": ""
+              }
+            </script>
         </div>
       </div>
       <div class="card" id="crypto">
         <div class="section-title">BTC/USD</div>
         <div class="tradingview-widget-container">
           <div class="tradingview-widget-container__widget"></div>
-          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
-          {
-            "symbol": "COINBASE:BTCUSD",
-            "width": "100%",
-            "height": "220",
-            "locale": "ja",
-            "dateRange": "12M",
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "autosize": false,
-            "largeChartUrl": ""
-          }
-          </script>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+              {
+                "symbol": "COINBASE:BTCUSD",
+                  "width": "100%",
+                    "height": "220",
+                      "locale": "ja",
+                        "dateRange": "12M",
+                          "colorTheme": "dark",
+                            "isTransparent": true,
+                              "autosize": false,
+                                "largeChartUrl": ""
+              }
+            </script>
         </div>
       </div>
     </section>
 
     <div class="ad" role="complementary" aria-label="広告" style="margin:18px 0;">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6238004847920381"
-           data-ad-slot="6535135716"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6238004847920381" data-ad-slot="6535135716"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 
@@ -247,29 +351,25 @@
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
-        {
-          "colorTheme": "dark",
-          "isTransparent": true,
-          "width": "100%",
-          "height": "520",
-          "locale": "ja",
-          "importanceFilter": "-1,0,1"
-        }
+          {
+            "colorTheme": "dark",
+              "isTransparent": true,
+                "width": "100%",
+                  "height": "520",
+                    "locale": "ja",
+                      "importanceFilter": "-1,0,1"
+          }
         </script>
       </div>
     </section>
 
     <div class="ad" role="complementary" aria-label="広告" style="margin:18px 0;">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-6238004847920381"
-           data-ad-slot="1896874949"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6238004847920381" data-ad-slot="1896874949"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    
-    
+
+
   </main>
 
   <footer>
@@ -312,8 +412,9 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-    function togglePolicy(){ const el = document.getElementById('policy'); el.style.display = (el.style.display==='none'||!el.style.display)?'block':'none'; }
-    function toggleDisclaimer(){ const el = document.getElementById('disclaimer'); el.style.display = (el.style.display==='none'||!el.style.display)?'block':'none'; }
+    function togglePolicy() { const el = document.getElementById('policy'); el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none'; }
+    function toggleDisclaimer() { const el = document.getElementById('disclaimer'); el.style.display = (el.style.display === 'none' || !el.style.display) ? 'block' : 'none'; }
   </script>
 </body>
+
 </html>
